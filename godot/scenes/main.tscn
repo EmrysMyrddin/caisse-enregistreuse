@@ -1,0 +1,101 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6cwms37nw5dh"]
+
+[ext_resource type="Texture2D" uid="uid://cx41u8dmcmcvc" path="res://assets/icon.svg" id="1_o5qli"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o5qli"]
+
+[node name="External Margins" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+metadata/_edit_lock_ = true
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="Main Area" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.8
+anchor_bottom = 1.0
+offset_right = 0.39996338
+size_flags_horizontal = 3
+theme_override_constants/margin_right = 20
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Main Area"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="LineEdit" type="LineEdit" parent="Control/Main Area/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Rechercher"
+
+[node name="MainPanel" type="GridContainer" parent="Control/Main Area/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/v_separation = 20
+columns = 4
+
+[node name="Icon" type="TextureRect" parent="Control/Main Area/VBoxContainer/MainPanel"]
+layout_mode = 2
+texture = ExtResource("1_o5qli")
+
+[node name="Icon2" type="TextureRect" parent="Control/Main Area/VBoxContainer/MainPanel"]
+layout_mode = 2
+texture = ExtResource("1_o5qli")
+
+[node name="Icon3" type="TextureRect" parent="Control/Main Area/VBoxContainer/MainPanel"]
+layout_mode = 2
+texture = ExtResource("1_o5qli")
+
+[node name="Icon4" type="TextureRect" parent="Control/Main Area/VBoxContainer/MainPanel"]
+layout_mode = 2
+texture = ExtResource("1_o5qli")
+
+[node name="Icon5" type="TextureRect" parent="Control/Main Area/VBoxContainer/MainPanel"]
+layout_mode = 2
+texture = ExtResource("1_o5qli")
+
+[node name="Icon6" type="TextureRect" parent="Control/Main Area/VBoxContainer/MainPanel"]
+layout_mode = 2
+texture = ExtResource("1_o5qli")
+
+[node name="Icon7" type="TextureRect" parent="Control/Main Area/VBoxContainer/MainPanel"]
+layout_mode = 2
+texture = ExtResource("1_o5qli")
+
+[node name="Icon8" type="TextureRect" parent="Control/Main Area/VBoxContainer/MainPanel"]
+layout_mode = 2
+texture = ExtResource("1_o5qli")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.15991211
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_o5qli")
+metadata/_edit_lock_ = true
+
+[node name="Ticket" type="VBoxContainer" parent="Control/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
