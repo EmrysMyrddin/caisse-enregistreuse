@@ -1,2 +1,0 @@
-[env]
-LLVM_PATH = { value = "/opt/homebrew/opt/llvm/bin/" }

@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmcy8hb18kvit"]
+
+[ext_resource type="Texture2D" uid="uid://cx41u8dmcmcvc" path="res://assets/icon.svg" id="1_1pvxx"]
+[ext_resource type="Script" uid="uid://dkybamvbtjmbb" path="res://scripts/components/ticket_item_component.gd" id="1_lkb1v"]
+
+[node name="TicketItem" type="MarginContainer" node_paths=PackedStringArray("label_quantity", "label_name", "image", "button_more", "button_less")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lkb1v")
+label_quantity = NodePath("EntryLine/Quantity")
+label_name = NodePath("EntryLine/Name")
+image = NodePath("EntryLine/Image")
+button_more = NodePath("EntryLine/Actions/More")
+button_less = NodePath("EntryLine/Actions/Less")
+
+[node name="EntryLine" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Quantity" type="Label" parent="EntryLine"]
+layout_mode = 2
+text = "x1"
+
+[node name="Image" type="TextureRect" parent="EntryLine"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("1_1pvxx")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="EntryLine"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Product Name"
+
+[node name="Actions" type="VBoxContainer" parent="EntryLine"]
+layout_mode = 2
+alignment = 1
+
+[node name="More" type="Button" parent="EntryLine/Actions"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = " + "
+
+[node name="Less" type="Button" parent="EntryLine/Actions"]
+layout_mode = 2
+text = "-"

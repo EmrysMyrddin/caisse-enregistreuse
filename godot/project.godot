@@ -13,7 +13,14 @@ config_version=5
 config/name="Caisse Enregistreuse"
 run/main_scene="uid://b6cwms37nw5dh"
 config/features=PackedStringArray("4.5", "Mobile")
+boot_splash/bg_color=Color(1, 1, 1, 1)
 config/icon="res://assets/icon.svg"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/scale=2.0
 
 [rendering]
 

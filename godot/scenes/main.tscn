@@ -1,101 +1,366 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6cwms37nw5dh"]
+[gd_scene load_steps=31 format=3 uid="uid://b6cwms37nw5dh"]
 
-[ext_resource type="Texture2D" uid="uid://cx41u8dmcmcvc" path="res://assets/icon.svg" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://bvfqwngrft43" path="res://scripts/grid.gd" id="1_o5qli"]
+[ext_resource type="Theme" uid="uid://dspr4oim4oouq" path="res://theme.tres" id="1_o6xl0"]
+[ext_resource type="Script" uid="uid://cllrkebsc3egn" path="res://scripts/components/unfocus_search.gd" id="2_85g3d"]
+[ext_resource type="Script" uid="uid://dbm6uie2oypb2" path="res://scripts/resources/category_item.gd" id="2_jyhfs"]
+[ext_resource type="Script" uid="uid://bstd77xfrto5l" path="res://scripts/components/line_edit_upercased.gd" id="2_tipki"]
+[ext_resource type="Texture2D" uid="uid://cx41u8dmcmcvc" path="res://assets/icon.svg" id="3_jyhfs"]
+[ext_resource type="Script" uid="uid://pj7roafg1jxf" path="res://scripts/resources/product_item.gd" id="3_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://b00f0abweilhe" path="res://scenes/components/gallery_item.tscn" id="4_tefeu"]
+[ext_resource type="Script" uid="uid://dmcjqeq77460d" path="res://scripts/ticket.gd" id="6_tefeu"]
+[ext_resource type="Texture2D" uid="uid://codnjhfrhqmjm" path="res://assets/poulet.png" id="8_choun"]
+[ext_resource type="Texture2D" uid="uid://pil02etrn78f" path="res://assets/épicerie salée.png" id="9_ya4ey"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o5qli"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6xl0"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
-[node name="External Margins" type="MarginContainer"]
+[sub_resource type="Resource" id="Resource_tefeu"]
+script = ExtResource("3_tbgi4")
+price = 150
+name = "Poires"
+texture = ExtResource("3_jyhfs")
+metadata/_custom_type_script = "uid://pj7roafg1jxf"
+
+[sub_resource type="Resource" id="Resource_jyhfs"]
+script = ExtResource("3_tbgi4")
+price = 100
+name = "Pommes"
+texture = ExtResource("3_jyhfs")
+metadata/_custom_type_script = "uid://pj7roafg1jxf"
+
+[sub_resource type="Resource" id="Resource_o6xl0"]
+script = ExtResource("2_jyhfs")
+products = Array[ExtResource("3_tbgi4")]([SubResource("Resource_tefeu"), SubResource("Resource_jyhfs")])
+name = "Fruits"
+texture = ExtResource("3_jyhfs")
+metadata/_custom_type_script = "uid://dbm6uie2oypb2"
+
+[sub_resource type="Resource" id="Resource_tipki"]
+script = ExtResource("3_tbgi4")
+price = 120
+name = "Tomates"
+texture = ExtResource("3_jyhfs")
+metadata/_custom_type_script = "uid://pj7roafg1jxf"
+
+[sub_resource type="Resource" id="Resource_85g3d"]
+script = ExtResource("3_tbgi4")
+price = 90
+name = "Pommes de terres"
+texture = ExtResource("3_jyhfs")
+metadata/_custom_type_script = "uid://pj7roafg1jxf"
+
+[sub_resource type="Resource" id="Resource_choun"]
+script = ExtResource("2_jyhfs")
+products = Array[ExtResource("3_tbgi4")]([SubResource("Resource_tipki"), SubResource("Resource_85g3d")])
+name = "Légumes"
+texture = ExtResource("3_jyhfs")
+metadata/_custom_type_script = "uid://dbm6uie2oypb2"
+
+[sub_resource type="Resource" id="Resource_ya4ey"]
+script = ExtResource("3_tbgi4")
+price = 250
+name = "Pain au chocolat"
+texture = ExtResource("3_jyhfs")
+metadata/_custom_type_script = "uid://pj7roafg1jxf"
+
+[sub_resource type="Resource" id="Resource_eb6dy"]
+script = ExtResource("3_tbgi4")
+price = 250
+name = "Croissant"
+texture = ExtResource("3_jyhfs")
+metadata/_custom_type_script = "uid://pj7roafg1jxf"
+
+[sub_resource type="Resource" id="Resource_trceg"]
+script = ExtResource("3_tbgi4")
+price = 100
+name = "Baguette"
+texture = ExtResource("3_jyhfs")
+metadata/_custom_type_script = "uid://pj7roafg1jxf"
+
+[sub_resource type="Resource" id="Resource_a8y0u"]
+script = ExtResource("2_jyhfs")
+products = Array[ExtResource("3_tbgi4")]([SubResource("Resource_ya4ey"), SubResource("Resource_eb6dy"), SubResource("Resource_trceg")])
+name = "Boulangerie"
+texture = ExtResource("3_jyhfs")
+metadata/_custom_type_script = "uid://dbm6uie2oypb2"
+
+[sub_resource type="Resource" id="Resource_tbgi4"]
+script = ExtResource("3_tbgi4")
+price = 1800
+name = "Entrecôte"
+texture = ExtResource("3_jyhfs")
+metadata/_custom_type_script = "uid://pj7roafg1jxf"
+
+[sub_resource type="Resource" id="Resource_jkv2x"]
+script = ExtResource("3_tbgi4")
+price = 550
+name = "Saucisse"
+texture = ExtResource("3_jyhfs")
+metadata/_custom_type_script = "uid://pj7roafg1jxf"
+
+[sub_resource type="Resource" id="Resource_jbj1t"]
+script = ExtResource("3_tbgi4")
+price = 1116
+name = "Poulet"
+texture = ExtResource("8_choun")
+metadata/_custom_type_script = "uid://pj7roafg1jxf"
+
+[sub_resource type="Resource" id="Resource_muem4"]
+script = ExtResource("2_jyhfs")
+products = Array[ExtResource("3_tbgi4")]([SubResource("Resource_tbgi4"), SubResource("Resource_jkv2x"), SubResource("Resource_jbj1t")])
+name = "Boucherie"
+texture = ExtResource("3_jyhfs")
+metadata/_custom_type_script = "uid://dbm6uie2oypb2"
+
+[sub_resource type="Resource" id="Resource_dp3eg"]
+script = ExtResource("2_jyhfs")
+name = "Épicerie fine de ouf guedin"
+texture = ExtResource("9_ya4ey")
+metadata/_custom_type_script = "uid://dbm6uie2oypb2"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_choun"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+draw_center = false
+border_width_left = 2
+border_color = Color(0, 0, 0, 1)
+corner_detail = 1
+
+[sub_resource type="SystemFont" id="SystemFont_tipki"]
+font_names = PackedStringArray("Montserrat")
+font_weight = 700
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_85g3d"]
+font = SubResource("SystemFont_tipki")
+font_size = 33
+font_color = Color(0, 0, 0, 1)
+
+[node name="Panel" type="Panel" node_paths=PackedStringArray("search_input")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_o6xl0")
+theme_override_styles/panel = SubResource("StyleBoxFlat_o6xl0")
+script = ExtResource("2_85g3d")
+search_input = NodePath("Main Area/VBoxContainer/SearchInput")
+
+[node name="Main Area" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.7
+anchor_bottom = 1.0
+offset_right = -0.6000366
+size_flags_horizontal = 3
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
-metadata/_edit_lock_ = true
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 2
-metadata/_edit_lock_ = true
-
-[node name="Main Area" type="MarginContainer" parent="Control"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.8
-anchor_bottom = 1.0
-offset_right = 0.39996338
-size_flags_horizontal = 3
-theme_override_constants/margin_right = 20
-metadata/_edit_lock_ = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/Main Area"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Main Area"]
 layout_mode = 2
 theme_override_constants/separation = 20
+metadata/_edit_lock_ = true
 
-[node name="LineEdit" type="LineEdit" parent="Control/Main Area/VBoxContainer"]
+[node name="SearchInput" type="LineEdit" parent="Main Area/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Rechercher"
+placeholder_text = "RECHERCHER UN ARTICLE"
+clear_button_enabled = true
+select_all_on_focus = true
+caret_blink = true
+script = ExtResource("2_tipki")
+metadata/_edit_lock_ = true
 
-[node name="MainPanel" type="GridContainer" parent="Control/Main Area/VBoxContainer"]
+[node name="MainPanel" type="GridContainer" parent="Main Area/VBoxContainer" node_paths=PackedStringArray("ticket")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
-columns = 4
-
-[node name="Icon" type="TextureRect" parent="Control/Main Area/VBoxContainer/MainPanel"]
-layout_mode = 2
-texture = ExtResource("1_o5qli")
-
-[node name="Icon2" type="TextureRect" parent="Control/Main Area/VBoxContainer/MainPanel"]
-layout_mode = 2
-texture = ExtResource("1_o5qli")
-
-[node name="Icon3" type="TextureRect" parent="Control/Main Area/VBoxContainer/MainPanel"]
-layout_mode = 2
-texture = ExtResource("1_o5qli")
-
-[node name="Icon4" type="TextureRect" parent="Control/Main Area/VBoxContainer/MainPanel"]
-layout_mode = 2
-texture = ExtResource("1_o5qli")
-
-[node name="Icon5" type="TextureRect" parent="Control/Main Area/VBoxContainer/MainPanel"]
-layout_mode = 2
-texture = ExtResource("1_o5qli")
-
-[node name="Icon6" type="TextureRect" parent="Control/Main Area/VBoxContainer/MainPanel"]
-layout_mode = 2
-texture = ExtResource("1_o5qli")
-
-[node name="Icon7" type="TextureRect" parent="Control/Main Area/VBoxContainer/MainPanel"]
-layout_mode = 2
-texture = ExtResource("1_o5qli")
-
-[node name="Icon8" type="TextureRect" parent="Control/Main Area/VBoxContainer/MainPanel"]
-layout_mode = 2
-texture = ExtResource("1_o5qli")
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Control"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.8
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 0.15991211
-size_flags_horizontal = 8
-theme_override_styles/panel = SubResource("StyleBoxFlat_o5qli")
+columns = 6
+script = ExtResource("1_o5qli")
+ticket = NodePath("../../../RightPanel/VBoxContainer/ScrollContainer/MarginContainer/Ticket")
+grid_size = Vector2i(6, 3)
+categories = Array[ExtResource("2_jyhfs")]([SubResource("Resource_o6xl0"), SubResource("Resource_choun"), SubResource("Resource_a8y0u"), SubResource("Resource_muem4"), SubResource("Resource_dp3eg")])
+items = Array[ExtResource("2_jyhfs")]([SubResource("Resource_o6xl0"), SubResource("Resource_choun"), SubResource("Resource_a8y0u"), SubResource("Resource_muem4"), SubResource("Resource_dp3eg")])
 metadata/_edit_lock_ = true
 
-[node name="Ticket" type="VBoxContainer" parent="Control/ScrollContainer"]
+[node name="Item_0" parent="Main Area/VBoxContainer/MainPanel" instance=ExtResource("4_tefeu")]
+layout_mode = 2
+enabled = true
+item = SubResource("Resource_o6xl0")
+
+[node name="Item_1" parent="Main Area/VBoxContainer/MainPanel" instance=ExtResource("4_tefeu")]
+layout_mode = 2
+enabled = true
+item = SubResource("Resource_choun")
+
+[node name="Item_2" parent="Main Area/VBoxContainer/MainPanel" instance=ExtResource("4_tefeu")]
+layout_mode = 2
+enabled = true
+item = SubResource("Resource_a8y0u")
+
+[node name="Item_3" parent="Main Area/VBoxContainer/MainPanel" instance=ExtResource("4_tefeu")]
+layout_mode = 2
+enabled = true
+item = SubResource("Resource_muem4")
+
+[node name="Item_4" parent="Main Area/VBoxContainer/MainPanel" instance=ExtResource("4_tefeu")]
+layout_mode = 2
+enabled = true
+item = SubResource("Resource_dp3eg")
+
+[node name="Item_5" parent="Main Area/VBoxContainer/MainPanel" instance=ExtResource("4_tefeu")]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+enabled = false
+
+[node name="Item_6" parent="Main Area/VBoxContainer/MainPanel" instance=ExtResource("4_tefeu")]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+enabled = false
+
+[node name="Item_7" parent="Main Area/VBoxContainer/MainPanel" instance=ExtResource("4_tefeu")]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+enabled = false
+
+[node name="Item_8" parent="Main Area/VBoxContainer/MainPanel" instance=ExtResource("4_tefeu")]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+enabled = false
+
+[node name="Item_9" parent="Main Area/VBoxContainer/MainPanel" instance=ExtResource("4_tefeu")]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+enabled = false
+
+[node name="Item_10" parent="Main Area/VBoxContainer/MainPanel" instance=ExtResource("4_tefeu")]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+enabled = false
+
+[node name="Item_11" parent="Main Area/VBoxContainer/MainPanel" instance=ExtResource("4_tefeu")]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+enabled = false
+
+[node name="Item_12" parent="Main Area/VBoxContainer/MainPanel" instance=ExtResource("4_tefeu")]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+enabled = false
+
+[node name="Item_13" parent="Main Area/VBoxContainer/MainPanel" instance=ExtResource("4_tefeu")]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+enabled = false
+
+[node name="Item_14" parent="Main Area/VBoxContainer/MainPanel" instance=ExtResource("4_tefeu")]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+enabled = false
+
+[node name="Item_15" parent="Main Area/VBoxContainer/MainPanel" instance=ExtResource("4_tefeu")]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+enabled = false
+
+[node name="Item_16" parent="Main Area/VBoxContainer/MainPanel" instance=ExtResource("4_tefeu")]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+enabled = false
+
+[node name="Item_17" parent="Main Area/VBoxContainer/MainPanel" instance=ExtResource("4_tefeu")]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+enabled = false
+
+[node name="RightPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.60009766
+offset_right = 0.23999023
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_choun")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RightPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="RightPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="TicketTitle" type="Label" parent="RightPanel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "Panier"
+label_settings = SubResource("LabelSettings_85g3d")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="RightPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="RightPanel/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Ticket" type="VBoxContainer" parent="RightPanel/VBoxContainer/ScrollContainer/MarginContainer" node_paths=PackedStringArray("label_total")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+theme_override_constants/separation = 20
+script = ExtResource("6_tefeu")
+label_total = NodePath("../../../MarginContainer2/VBoxContainer/Total")
 
-[node name="MarginContainer" type="MarginContainer" parent="Control"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="MarginContainer2" type="MarginContainer" parent="RightPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RightPanel/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Total" type="Label" parent="RightPanel/VBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "0,00€"
+horizontal_alignment = 1
+
+[node name="ValidateButton" type="Button" parent="RightPanel/VBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+text = "TERMINER
+"

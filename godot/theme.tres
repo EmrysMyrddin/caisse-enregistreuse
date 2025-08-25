@@ -1,0 +1,44 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://dspr4oim4oouq"]
+
+[ext_resource type="SystemFont" uid="uid://fmxa8cxq16ji" path="res://fonts/montserrat_regular.tres" id="1_e1x85"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1x85"]
+bg_color = Color(0, 0.27450982, 0.7607843, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.04182198, 0.2144152, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wvktn"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[resource]
+default_font_size = 20
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/fonts/font = ExtResource("1_e1x85")
+LineEdit/colors/caret_color = Color(0.043137256, 0.21568628, 1, 1)
+LineEdit/colors/font_color = Color(0, 0, 0, 1)
+LineEdit/colors/font_placeholder_color = Color(0, 0, 0, 1)
+LineEdit/colors/selection_color = Color(0.44952947, 0.61974543, 1, 1)
+LineEdit/constants/caret_width = 2
+LineEdit/fonts/font = ExtResource("1_e1x85")
+LineEdit/styles/focus = SubResource("StyleBoxFlat_e1x85")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_wvktn")

@@ -1,0 +1,5 @@
+[gd_resource type="SystemFont" format=3 uid="uid://fmxa8cxq16ji"]
+
+[resource]
+font_names = PackedStringArray("Montserrat")
+font_weight = 500
