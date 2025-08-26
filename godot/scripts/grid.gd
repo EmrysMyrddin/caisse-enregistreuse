@@ -5,6 +5,7 @@ extends GridContainer
 const item_scene = preload("res://scenes/components/gallery_item.tscn")
 
 @export var ticket: Ticket
+@export var modal: Modal
 
 @export var grid_size: Vector2i:
 	get:
@@ -103,7 +104,7 @@ func _on_item_clicked(item: GalleryItem):
 	if item is CategoryItem:
 		self.items = item.products
 	elif item is ProductItem:
-		ticket.add_product(item, 1)
+		modal.open(item, 1)
 	elif item is BackItem:
 		self.items = categories
 	else:

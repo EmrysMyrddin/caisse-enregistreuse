@@ -1,11 +1,16 @@
 extends Panel
 
-@export var search_input: LineEdit
+var current_focus: Control
+
+
+func _ready() -> void:
+	get_viewport().gui_focus_changed.connect(func(control: Control): current_focus = control)
 
 
 func _gui_input(event: InputEvent) -> void:
 	if (
-		event is InputEventMouseButton
-		and not search_input.get_global_rect().has_point(event.global_position)
+		current_focus
+		and event is InputEventMouseButton
+		and not current_focus.get_global_rect().has_point(event.global_position)
 	):
-		search_input.release_focus()
+		current_focus.release_focus()

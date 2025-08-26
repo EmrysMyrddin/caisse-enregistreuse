@@ -1,44 +1,44 @@
 class_name TicketItemComponent
 extends MarginContainer
 
-signal less
-signal more
-
 @export var product: ProductItem:
 	get:
 		return product
 	set(value):
 		if product != value:
 			if product:
-				product.changed.disconnect(_update)
+				product.changed.disconnect(_product_changed)
 			product = value
 			if product:
-				product.changed.connect(_update)
-			_update()
+				print("updating ticket entry product")
+				product.changed.connect(_product_changed)
+				label_name.text = product.name
+				image.texture = product.texture
+				label_unit_price.text = _price_to_string(product.price)
 
 @export var quantity: int:
 	get:
 		return quantity
 	set(value):
-		if quantity != value:
-			quantity = value
-			_update()
+		print("updating ticket entry quantity")
+		quantity = value
+		label_quantity.text = "x" + str(quantity)
+		if product:
+			label_total_price.text = _price_to_string(product.price * quantity)
 
 @export var label_quantity: Label
 @export var label_name: Label
+@export var label_unit_price: Label
+@export var label_total_price: Label
 @export var image: TextureRect
 @export var button_more: Button
 @export var button_less: Button
 
 
-func _ready() -> void:
-	button_more.pressed.connect(func(): more.emit())
-	button_less.pressed.connect(func(): less.emit())
+func _product_changed():
+	self.product = product
+	self.quantity = quantity
 
 
-func _update():
-	if product:
-		label_name.text = product.name
-		image.texture = product.texture
-
-	label_quantity.text = "x" + str(quantity)
+func _price_to_string(price: int) -> String:
+	@warning_ignore("integer_division") return str(price / 100) + "," + str(price % 100) + "€"

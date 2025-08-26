@@ -23,8 +23,6 @@ func add_product(product: ProductItem, quantity: int):
 		basket_components[product] = component
 		component.product = product
 		component.name = "Entry - " + product.name
-		component.more.connect(func(): add_product(product, 1))
-		component.less.connect(func(): add_product(product, -1))
 		add_child(component)
 	else:
 		print("product exists, updating basket")
@@ -35,7 +33,10 @@ func add_product(product: ProductItem, quantity: int):
 		basket_components.erase(product)
 		basket.erase(product)
 	else:
-		basket_components[product].quantity = basket[product]
+		var tween = get_tree().create_tween().set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(basket_components[product], "scale", Vector2.ONE * 1.05, 0.2)
+		tween.tween_property(basket_components[product], "scale", Vector2.ONE, 0.2)
+		tween.tween_callback(func(): basket_components[product].quantity = basket[product])
 
 	_update_total()
 
@@ -46,7 +47,7 @@ func _update_total() -> void:
 	for product in basket:
 		total += basket[product] * product.price
 
-	@warning_ignore('integer_division')
+	@warning_ignore("integer_division")
 	label_total.text = str(total / 100) + "," + str(total % 100) + "€"
 
 

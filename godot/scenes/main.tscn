@@ -1,7 +1,6 @@
-[gd_scene load_steps=31 format=3 uid="uid://b6cwms37nw5dh"]
+[gd_scene load_steps=48 format=3 uid="uid://b6cwms37nw5dh"]
 
 [ext_resource type="Script" uid="uid://bvfqwngrft43" path="res://scripts/grid.gd" id="1_o5qli"]
-[ext_resource type="Theme" uid="uid://dspr4oim4oouq" path="res://theme.tres" id="1_o6xl0"]
 [ext_resource type="Script" uid="uid://cllrkebsc3egn" path="res://scripts/components/unfocus_search.gd" id="2_85g3d"]
 [ext_resource type="Script" uid="uid://dbm6uie2oypb2" path="res://scripts/resources/category_item.gd" id="2_jyhfs"]
 [ext_resource type="Script" uid="uid://bstd77xfrto5l" path="res://scripts/components/line_edit_upercased.gd" id="2_tipki"]
@@ -11,6 +10,10 @@
 [ext_resource type="Script" uid="uid://dmcjqeq77460d" path="res://scripts/ticket.gd" id="6_tefeu"]
 [ext_resource type="Texture2D" uid="uid://codnjhfrhqmjm" path="res://assets/poulet.png" id="8_choun"]
 [ext_resource type="Texture2D" uid="uid://pil02etrn78f" path="res://assets/épicerie salée.png" id="9_ya4ey"]
+[ext_resource type="Script" uid="uid://bmn46p0b6n8po" path="res://scripts/modal.gd" id="11_ya4ey"]
+[ext_resource type="Script" uid="uid://ufh6mhdmrcj4" path="res://scripts/components/centered_pivot.gd" id="12_a8y0u"]
+[ext_resource type="SystemFont" uid="uid://78nrcbitq0yv" path="res://fonts/montserrat_bold.tres" id="13_a8y0u"]
+[ext_resource type="SystemFont" uid="uid://fmxa8cxq16ji" path="res://fonts/montserrat_regular.tres" id="14_jkv2x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6xl0"]
 content_margin_left = 0.0
@@ -149,16 +152,173 @@ font = SubResource("SystemFont_tipki")
 font_size = 33
 font_color = Color(0, 0, 0, 1)
 
-[node name="Panel" type="Panel" node_paths=PackedStringArray("search_input")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ya4ey"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_jbj1t"]
+font = ExtResource("13_a8y0u")
+font_size = 40
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_muem4"]
+font = ExtResource("14_jkv2x")
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ld40"]
+content_margin_left = 9.0
+content_margin_right = 9.0
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gqmmt"]
+content_margin_left = 9.0
+content_margin_right = 9.0
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yc10j"]
+content_margin_left = 9.0
+content_margin_right = 9.0
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jscy8"]
+content_margin_left = 9.0
+content_margin_right = 9.0
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pm3ni"]
+content_margin_left = 9.0
+content_margin_right = 9.0
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.043137256, 0.21568628, 1, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_dp3eg"]
+font = ExtResource("13_a8y0u")
+font_size = 30
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8y0u"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkv2x"]
+bg_color = Color(0, 0, 0, 0.1882353)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.13137859, 0.13137859, 0.13137859, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jbj1t"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.13137859, 0.13137859, 0.13137859, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_muem4"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3180198, 0.31801978, 0.31801975, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dp3eg"]
+bg_color = Color(0, 0.27450982, 0.7607843, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.04182198, 0.2144152, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Panel" type="Panel"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_o6xl0")
 theme_override_styles/panel = SubResource("StyleBoxFlat_o6xl0")
 script = ExtResource("2_85g3d")
-search_input = NodePath("Main Area/VBoxContainer/SearchInput")
+metadata/_edit_lock_ = true
 
 [node name="Main Area" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -171,6 +331,7 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
+metadata/_edit_lock_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Main Area"]
 layout_mode = 2
@@ -187,7 +348,7 @@ caret_blink = true
 script = ExtResource("2_tipki")
 metadata/_edit_lock_ = true
 
-[node name="MainPanel" type="GridContainer" parent="Main Area/VBoxContainer" node_paths=PackedStringArray("ticket")]
+[node name="MainPanel" type="GridContainer" parent="Main Area/VBoxContainer" node_paths=PackedStringArray("ticket", "modal")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -196,6 +357,7 @@ theme_override_constants/v_separation = 20
 columns = 6
 script = ExtResource("1_o5qli")
 ticket = NodePath("../../../RightPanel/VBoxContainer/ScrollContainer/MarginContainer/Ticket")
+modal = NodePath("../../../ModalOverlay")
 grid_size = Vector2i(6, 3)
 categories = Array[ExtResource("2_jyhfs")]([SubResource("Resource_o6xl0"), SubResource("Resource_choun"), SubResource("Resource_a8y0u"), SubResource("Resource_muem4"), SubResource("Resource_dp3eg")])
 items = Array[ExtResource("2_jyhfs")]([SubResource("Resource_o6xl0"), SubResource("Resource_choun"), SubResource("Resource_a8y0u"), SubResource("Resource_muem4"), SubResource("Resource_dp3eg")])
@@ -300,7 +462,9 @@ anchor_bottom = 1.0
 offset_left = -0.60009766
 offset_right = 0.23999023
 size_flags_horizontal = 8
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_choun")
+metadata/_edit_lock_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="RightPanel"]
 layout_mode = 1
@@ -324,8 +488,10 @@ horizontal_alignment = 1
 uppercase = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="RightPanel/VBoxContainer"]
+clip_contents = false
 layout_mode = 2
 size_flags_vertical = 3
+horizontal_scroll_mode = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="RightPanel/VBoxContainer/ScrollContainer"]
 layout_mode = 2
@@ -364,3 +530,132 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "TERMINER
 "
+
+[node name="ModalOverlay" type="Panel" parent="." node_paths=PackedStringArray("ticket", "modal", "label_name", "label_quantity", "button_less", "button_more", "button_validate", "hbox_images")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_ya4ey")
+ticket = NodePath("../RightPanel/VBoxContainer/ScrollContainer/MarginContainer/Ticket")
+modal = NodePath("Modal")
+label_name = NodePath("Modal/MarginContainer/ModalContent/Name")
+label_quantity = NodePath("Modal/MarginContainer/ModalContent/QuantityContainer/QuantityInput/Quantity")
+button_less = NodePath("Modal/MarginContainer/ModalContent/QuantityContainer/QuantityInput/Less")
+button_more = NodePath("Modal/MarginContainer/ModalContent/QuantityContainer/QuantityInput/More")
+button_validate = NodePath("Modal/MarginContainer/ModalContent/ValidateButton")
+hbox_images = NodePath("Modal/MarginContainer/ModalContent/Images")
+metadata/_edit_lock_ = true
+
+[node name="Modal" type="Panel" parent="ModalOverlay"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 192.0
+offset_top = 128.0
+offset_right = -192.0
+offset_bottom = -120.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(768, 416)
+theme_override_styles/panel = SubResource("StyleBoxFlat_ya4ey")
+
+[node name="CenteredPivot" type="Node" parent="ModalOverlay/Modal"]
+script = ExtResource("12_a8y0u")
+metadata/_custom_type_script = "uid://ufh6mhdmrcj4"
+
+[node name="MarginContainer" type="MarginContainer" parent="ModalOverlay/Modal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 40
+
+[node name="ModalContent" type="VBoxContainer" parent="ModalOverlay/Modal/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Name" type="Label" parent="ModalOverlay/Modal/MarginContainer/ModalContent"]
+layout_mode = 2
+text = "Nom"
+label_settings = SubResource("LabelSettings_jbj1t")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Images" type="HBoxContainer" parent="ModalOverlay/Modal/MarginContainer/ModalContent"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="Icon" type="TextureRect" parent="ModalOverlay/Modal/MarginContainer/ModalContent/Images"]
+layout_mode = 2
+texture = ExtResource("3_jyhfs")
+
+[node name="Icon2" type="TextureRect" parent="ModalOverlay/Modal/MarginContainer/ModalContent/Images"]
+layout_mode = 2
+texture = ExtResource("3_jyhfs")
+
+[node name="Icon3" type="TextureRect" parent="ModalOverlay/Modal/MarginContainer/ModalContent/Images"]
+layout_mode = 2
+texture = ExtResource("3_jyhfs")
+
+[node name="QuantityContainer" type="VBoxContainer" parent="ModalOverlay/Modal/MarginContainer/ModalContent"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="QuantityLabel" type="Label" parent="ModalOverlay/Modal/MarginContainer/ModalContent/QuantityContainer"]
+layout_mode = 2
+text = "Quantité"
+label_settings = SubResource("LabelSettings_muem4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuantityInput" type="HBoxContainer" parent="ModalOverlay/Modal/MarginContainer/ModalContent/QuantityContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Less" type="Button" parent="ModalOverlay/Modal/MarginContainer/ModalContent/QuantityContainer/QuantityInput"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_0ld40")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_gqmmt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yc10j")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_jscy8")
+theme_override_styles/focus = SubResource("StyleBoxFlat_pm3ni")
+text = " - "
+flat = true
+
+[node name="Quantity" type="Label" parent="ModalOverlay/Modal/MarginContainer/ModalContent/QuantityContainer/QuantityInput"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_dp3eg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="More" type="Button" parent="ModalOverlay/Modal/MarginContainer/ModalContent/QuantityContainer/QuantityInput"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_a8y0u")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jkv2x")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jbj1t")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_muem4")
+theme_override_styles/focus = SubResource("StyleBoxFlat_dp3eg")
+text = " + "
+flat = true
+
+[node name="ValidateButton" type="Button" parent="ModalOverlay/Modal/MarginContainer/ModalContent"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "AJOUTER AU PANIER"

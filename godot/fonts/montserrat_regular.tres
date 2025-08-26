@@ -2,4 +2,3 @@
 
 [resource]
 font_names = PackedStringArray("Montserrat")
-font_weight = 500
