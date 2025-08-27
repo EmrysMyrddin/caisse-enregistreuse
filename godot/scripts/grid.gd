@@ -6,6 +6,7 @@ const item_scene = preload("res://scenes/components/gallery_item.tscn")
 
 @export var ticket: Ticket
 @export var modal: Modal
+@export var search_input: LineEdit
 
 @export var grid_size: Vector2i:
 	get:
@@ -48,6 +49,7 @@ func _get_configuration_warnings() -> PackedStringArray:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	search_input.text_changed.connect(search)
 	for child: GalleryItemComponent in get_children():
 		child.clicked.connect(_on_item_clicked)
 	update_items_containers()
@@ -107,6 +109,7 @@ func _on_item_clicked(item: GalleryItem):
 		var product = item as ProductItem
 		modal.open(product, ticket.basket.get(product, 1))
 	elif item is BackItem:
+		search_input.text = ""
 		self.items = categories
 	else:
 		print("Unknow item type clicked: ", item)
@@ -114,3 +117,15 @@ func _on_item_clicked(item: GalleryItem):
 
 func is_showing_category() -> bool:
 	return items != categories
+
+
+func search(input: String) -> void:
+	if input.is_empty():
+		self.items = categories
+	else:
+		var products = []
+		for category in categories:
+			for product in category.products:
+				if product.name.to_upper().contains(input.to_upper()):
+					products.append(product)
+		self.items = products

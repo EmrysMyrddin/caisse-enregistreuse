@@ -348,7 +348,7 @@ caret_blink = true
 script = ExtResource("2_tipki")
 metadata/_edit_lock_ = true
 
-[node name="MainPanel" type="GridContainer" parent="Main Area/VBoxContainer" node_paths=PackedStringArray("ticket", "modal")]
+[node name="MainPanel" type="GridContainer" parent="Main Area/VBoxContainer" node_paths=PackedStringArray("ticket", "modal", "search_input")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -358,6 +358,7 @@ columns = 6
 script = ExtResource("1_o5qli")
 ticket = NodePath("../../../RightPanel/VBoxContainer/ScrollContainer/MarginContainer/Ticket")
 modal = NodePath("../../../ModalOverlay")
+search_input = NodePath("../SearchInput")
 grid_size = Vector2i(6, 3)
 categories = Array[ExtResource("2_jyhfs")]([SubResource("Resource_o6xl0"), SubResource("Resource_choun"), SubResource("Resource_a8y0u"), SubResource("Resource_muem4"), SubResource("Resource_dp3eg")])
 items = Array[ExtResource("2_jyhfs")]([SubResource("Resource_o6xl0"), SubResource("Resource_choun"), SubResource("Resource_a8y0u"), SubResource("Resource_muem4"), SubResource("Resource_dp3eg")])
