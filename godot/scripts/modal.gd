@@ -34,8 +34,6 @@ var quantity: int:
 			for child in hbox_images.get_child_count():
 				_show_image(child)
 
-		# _update_gap()
-
 var current_product: ProductItem:
 	get:
 		return current_product
@@ -117,12 +115,12 @@ func _show_image(i: int) -> void:
 	if child.visible:
 		return
 
-	print("show image", child.scale)
 	var child_tween = child.create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	child_tween.tween_callback(
 		func():
 			child.scale = Vector2.ZERO
 			child.show()
+			_update_gap()
 	)
 	child_tween.tween_property(child, "scale", Vector2.ONE, 0.2)
 
@@ -135,10 +133,14 @@ func _hide_image(i: int) -> void:
 	var child_tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	child_tween.tween_property(child, "scale", Vector2.ZERO, 0.2)
 	child_tween.tween_callback(child.hide)
+	child_tween.tween_callback(_update_gap)
 
-# func _update_gap():
-# 	if current_product:
-# 		var needed_width = current_product.texture.get_width() * quantity
-# 		var
-# 		var available_width = hbox_images.size.x
-# 		if needed_width >
+
+func _update_gap():
+	if current_product:
+		var needed_width = current_product.texture.get_width() * quantity
+		var available_width = modal.size.x - 400
+		var gaps_width = available_width - needed_width
+		var rounding = floor if gaps_width > 0 else ceil
+		var gap = min(rounding.call(gaps_width / (quantity - 1)), 40)
+		hbox_images.add_theme_constant_override("separation", gap)
