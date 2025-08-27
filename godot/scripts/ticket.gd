@@ -35,8 +35,8 @@ func add_product(product: ProductItem, quantity: int):
 	else:
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_CUBIC)
 		tween.tween_property(basket_components[product], "scale", Vector2.ONE * 1.05, 0.2)
-		tween.tween_property(basket_components[product], "scale", Vector2.ONE, 0.2)
 		tween.tween_callback(func(): basket_components[product].quantity = basket[product])
+		tween.tween_property(basket_components[product], "scale", Vector2.ONE, 0.2)
 
 	_update_total()
 

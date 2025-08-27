@@ -595,18 +595,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
-[node name="Icon" type="TextureRect" parent="ModalOverlay/Modal/MarginContainer/ModalContent/Images"]
-layout_mode = 2
-texture = ExtResource("3_jyhfs")
-
-[node name="Icon2" type="TextureRect" parent="ModalOverlay/Modal/MarginContainer/ModalContent/Images"]
-layout_mode = 2
-texture = ExtResource("3_jyhfs")
-
-[node name="Icon3" type="TextureRect" parent="ModalOverlay/Modal/MarginContainer/ModalContent/Images"]
-layout_mode = 2
-texture = ExtResource("3_jyhfs")
-
 [node name="QuantityContainer" type="VBoxContainer" parent="ModalOverlay/Modal/MarginContainer/ModalContent"]
 layout_mode = 2
 theme_override_constants/separation = 0

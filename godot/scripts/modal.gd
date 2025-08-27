@@ -20,18 +20,21 @@ var quantity: int:
 		label_quantity.text = str(quantity)
 		var nb_images = hbox_images.get_child_count()
 		if nb_images < quantity:
-			for child in hbox_images.get_children():
-				child.show()
+			for child in hbox_images.get_child_count():
+				_show_image(child)
 			for i in range(nb_images, quantity):
 				hbox_images.add_child(image.duplicate())
+				_show_image(i)
 		elif nb_images > quantity:
 			for i in quantity:
-				hbox_images.get_child(i).show()
+				_show_image(i)
 			for i in range(quantity, nb_images):
-				hbox_images.get_child(i).hide()
+				_hide_image(i)
 		else:
-			for child in hbox_images.get_children():
-				child.show()
+			for child in hbox_images.get_child_count():
+				_show_image(child)
+
+		# _update_gap()
 
 var current_product: ProductItem:
 	get:
@@ -39,6 +42,8 @@ var current_product: ProductItem:
 	set(value):
 		current_product = value
 		image.texture = current_product.texture
+		for child in hbox_images.get_children():
+			child.texture = current_product.texture
 		label_name.text = current_product.name
 
 var image: TextureRect
@@ -46,6 +51,9 @@ var image: TextureRect
 
 func _init():
 	image = TextureRect.new()
+	image.visible = false
+	image.scale = Vector2.ZERO
+	image.add_child(CenteredPivot.new())
 
 
 # Called when the node enters the scene tree for the first time.
@@ -102,3 +110,35 @@ func _on_click(handler: Callable) -> Callable:
 		if event is InputEventMouseButton:
 			if event.pressed:
 				handler.call()
+
+
+func _show_image(i: int) -> void:
+	var child: TextureRect = hbox_images.get_child(i)
+	if child.visible:
+		return
+
+	print("show image", child.scale)
+	var child_tween = child.create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	child_tween.tween_callback(
+		func():
+			child.scale = Vector2.ZERO
+			child.show()
+	)
+	child_tween.tween_property(child, "scale", Vector2.ONE, 0.2)
+
+
+func _hide_image(i: int) -> void:
+	var child: Control = hbox_images.get_child(i)
+	if not child.visible:
+		return
+
+	var child_tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	child_tween.tween_property(child, "scale", Vector2.ZERO, 0.2)
+	child_tween.tween_callback(child.hide)
+
+# func _update_gap():
+# 	if current_product:
+# 		var needed_width = current_product.texture.get_width() * quantity
+# 		var
+# 		var available_width = hbox_images.size.x
+# 		if needed_width >
