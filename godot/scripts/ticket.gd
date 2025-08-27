@@ -4,6 +4,7 @@ extends VBoxContainer
 const ticket_item_component = preload("res://scenes/components/ticket_item.tscn")
 
 @export var label_total: Label
+@export var modal: Modal
 
 var basket: Dictionary[ProductItem, int] = {}
 var basket_components: Dictionary[ProductItem, TicketItemComponent] = {}
@@ -14,7 +15,7 @@ func _ready() -> void:
 	pass  # Replace with function body.
 
 
-func add_product(product: ProductItem, quantity: int):
+func save_product(product: ProductItem, quantity: int):
 	print("adding product to ticket")
 	if not product in basket:
 		print("new product, adding to basket")
@@ -23,20 +24,21 @@ func add_product(product: ProductItem, quantity: int):
 		basket_components[product] = component
 		component.product = product
 		component.name = "Entry - " + product.name
+		component.gui_input.connect(Utils.on_click(func(): modal.open(product, basket[product])))
 		add_child(component)
 	else:
 		print("product exists, updating basket")
-		basket[product] += quantity
+		basket[product] = quantity
 
-	if basket[product] <= 0:
+	if quantity <= 0:
 		basket_components[product].queue_free()
 		basket_components.erase(product)
 		basket.erase(product)
 	else:
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_CUBIC)
 		tween.tween_property(basket_components[product], "scale", Vector2.ONE * 1.05, 0.2)
-		tween.tween_callback(func(): basket_components[product].quantity = basket[product])
 		tween.tween_property(basket_components[product], "scale", Vector2.ONE, 0.2)
+		tween.tween_callback(func(): basket_components[product].quantity = quantity)
 
 	_update_total()
 

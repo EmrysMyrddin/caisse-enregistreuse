@@ -10,6 +10,7 @@ var tween: Tween
 @export var button_less: Button
 @export var button_more: Button
 @export var button_validate: Button
+@export var button_close: Button
 @export var hbox_images: HBoxContainer
 
 var quantity: int:
@@ -58,14 +59,11 @@ func _init():
 func _ready() -> void:
 	self_modulate = Color(1, 1, 1, 0)
 	modal.scale = Vector2.ZERO
-	button_more.gui_input.connect(_on_click(more))
-	button_less.gui_input.connect(_on_click(less))
-	button_validate.gui_input.connect(_on_click(validate))
-
-
-func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		close()
+	button_more.gui_input.connect(Utils.on_click(more))
+	button_less.gui_input.connect(Utils.on_click(less))
+	button_validate.gui_input.connect(Utils.on_click(validate))
+	button_close.gui_input.connect(Utils.on_click(close))
+	gui_input.connect(Utils.on_click(close))
 
 
 func open(product: ProductItem, default_quantity: int):
@@ -100,18 +98,14 @@ func less():
 
 func validate():
 	close()
-	tween.parallel().tween_callback(func(): ticket.add_product(current_product, quantity))
-
-
-func _on_click(handler: Callable) -> Callable:
-	return func(event: InputEvent):
-		if event is InputEventMouseButton:
-			if event.pressed:
-				handler.call()
+	tween.parallel().tween_callback(func(): ticket.save_product(current_product, quantity))
 
 
 func _show_image(i: int) -> void:
 	var child: TextureRect = hbox_images.get_child(i)
+	if not visible:
+		child.show()
+		return
 	if child.visible:
 		return
 
@@ -127,6 +121,9 @@ func _show_image(i: int) -> void:
 
 func _hide_image(i: int) -> void:
 	var child: Control = hbox_images.get_child(i)
+	if not visible:
+		child.hide()
+		return
 	if not child.visible:
 		return
 
@@ -141,6 +138,5 @@ func _update_gap():
 		var needed_width = current_product.texture.get_width() * quantity
 		var available_width = modal.size.x - 400
 		var gaps_width = available_width - needed_width
-		var rounding = floor if gaps_width > 0 else ceil
-		var gap = min(rounding.call(gaps_width / (quantity - 1)), 40)
+		var gap = min(gaps_width / (quantity - 1), 40)
 		hbox_images.add_theme_constant_override("separation", gap)

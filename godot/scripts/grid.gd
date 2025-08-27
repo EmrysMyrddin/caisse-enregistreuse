@@ -104,7 +104,8 @@ func _on_item_clicked(item: GalleryItem):
 	if item is CategoryItem:
 		self.items = item.products
 	elif item is ProductItem:
-		modal.open(item, 1)
+		var product = item as ProductItem
+		modal.open(product, ticket.basket.get(product, 1))
 	elif item is BackItem:
 		self.items = categories
 	else:

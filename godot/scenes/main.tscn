@@ -501,13 +501,14 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Ticket" type="VBoxContainer" parent="RightPanel/VBoxContainer/ScrollContainer/MarginContainer" node_paths=PackedStringArray("label_total")]
+[node name="Ticket" type="VBoxContainer" parent="RightPanel/VBoxContainer/ScrollContainer/MarginContainer" node_paths=PackedStringArray("label_total", "modal")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme_override_constants/separation = 20
 script = ExtResource("6_tefeu")
 label_total = NodePath("../../../MarginContainer2/VBoxContainer/Total")
+modal = NodePath("../../../../../ModalOverlay")
 
 [node name="MarginContainer2" type="MarginContainer" parent="RightPanel/VBoxContainer"]
 layout_mode = 2
@@ -531,7 +532,7 @@ layout_mode = 2
 text = "TERMINER
 "
 
-[node name="ModalOverlay" type="Panel" parent="." node_paths=PackedStringArray("ticket", "modal", "label_name", "label_quantity", "button_less", "button_more", "button_validate", "hbox_images")]
+[node name="ModalOverlay" type="Panel" parent="." node_paths=PackedStringArray("ticket", "modal", "label_name", "label_quantity", "button_less", "button_more", "button_validate", "button_close", "hbox_images")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -546,6 +547,7 @@ label_quantity = NodePath("Modal/MarginContainer/ModalContent/QuantityContainer/
 button_less = NodePath("Modal/MarginContainer/ModalContent/QuantityContainer/QuantityInput/Less")
 button_more = NodePath("Modal/MarginContainer/ModalContent/QuantityContainer/QuantityInput/More")
 button_validate = NodePath("Modal/MarginContainer/ModalContent/ValidateButton")
+button_close = NodePath("Modal/CloseButton")
 hbox_images = NodePath("Modal/MarginContainer/ModalContent/Images")
 metadata/_edit_lock_ = true
 
@@ -646,4 +648,18 @@ flat = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "AJOUTER AU PANIER"
+text = "✓  TERMINER"
+
+[node name="CloseButton" type="Button" parent="ModalOverlay/Modal"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 16.0
+offset_right = -14.0
+offset_bottom = 101.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "✕"
+flat = true

@@ -41,15 +41,10 @@ signal clicked(item: GalleryItem)
 
 func _ready() -> void:
 	_update_item()
+	gui_input.connect(Utils.on_click(func(): clicked.emit(item)))
 
 
 func _update_item():
 	if item and is_node_ready():
 		_texture.texture = item.texture
 		_label.text = item.name
-
-
-func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed:
-		print("clicked", item)
-		clicked.emit(item)
