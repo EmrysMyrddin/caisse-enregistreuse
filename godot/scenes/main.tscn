@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://b6cwms37nw5dh"]
+[gd_scene load_steps=52 format=3 uid="uid://b6cwms37nw5dh"]
 
 [ext_resource type="Script" uid="uid://bvfqwngrft43" path="res://scripts/grid.gd" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://cllrkebsc3egn" path="res://scripts/components/unfocus_search.gd" id="2_85g3d"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://ufh6mhdmrcj4" path="res://scripts/components/centered_pivot.gd" id="12_a8y0u"]
 [ext_resource type="SystemFont" uid="uid://78nrcbitq0yv" path="res://fonts/montserrat_bold.tres" id="13_a8y0u"]
 [ext_resource type="SystemFont" uid="uid://fmxa8cxq16ji" path="res://fonts/montserrat_regular.tres" id="14_jkv2x"]
+[ext_resource type="Script" uid="uid://c0i7bju2scxrr" path="res://scripts/finish_panel.gd" id="15_jkv2x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6xl0"]
 content_margin_left = 0.0
@@ -310,6 +311,44 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="LabelSettings" id="LabelSettings_a8y0u"]
+font = ExtResource("13_a8y0u")
+font_size = 200
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jkv2x"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+angle_min = 1.0728836e-05
+angle_max = 360.00003
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 703.05
+initial_velocity_max = 903.13
+gravity = Vector3(0, 490, 0)
+linear_accel_min = 55.039997
+linear_accel_max = 79.63
+scale_min = 3.4399998
+scale_max = 17.32
+color = Color(0.76872903, 0.768729, 0.768729, 1)
+hue_variation_min = -0.68
+hue_variation_max = 0.72999996
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jbj1t"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+angle_min = 1.0728836e-05
+angle_max = 360.00003
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 703.05
+initial_velocity_max = 903.13
+gravity = Vector3(0, 490, 0)
+linear_accel_min = 55.039997
+linear_accel_max = 79.63
+scale_min = 3.4399998
+scale_max = 7.0499997
+color = Color(0.76872903, 0.768729, 0.768729, 1)
+hue_variation_min = -0.68
+hue_variation_max = 0.72999996
+
 [node name="Panel" type="Panel"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -475,11 +514,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
+metadata/_edit_lock_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="RightPanel/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_bottom = 20
+metadata/_edit_lock_ = true
 
 [node name="TicketTitle" type="Label" parent="RightPanel/VBoxContainer/MarginContainer"]
 layout_mode = 2
@@ -493,6 +534,7 @@ clip_contents = false
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
+metadata/_edit_lock_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="RightPanel/VBoxContainer/ScrollContainer"]
 layout_mode = 2
@@ -501,8 +543,9 @@ size_flags_vertical = 3
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
+metadata/_edit_lock_ = true
 
-[node name="Ticket" type="VBoxContainer" parent="RightPanel/VBoxContainer/ScrollContainer/MarginContainer" node_paths=PackedStringArray("label_total", "modal")]
+[node name="Ticket" type="VBoxContainer" parent="RightPanel/VBoxContainer/ScrollContainer/MarginContainer" node_paths=PackedStringArray("label_total", "modal", "button_validate", "panel_finish")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -510,6 +553,8 @@ theme_override_constants/separation = 20
 script = ExtResource("6_tefeu")
 label_total = NodePath("../../../MarginContainer2/VBoxContainer/Total")
 modal = NodePath("../../../../../ModalOverlay")
+button_validate = NodePath("../../../MarginContainer2/VBoxContainer/ValidateButton")
+panel_finish = NodePath("../../../../../Finish")
 
 [node name="MarginContainer2" type="MarginContainer" parent="RightPanel/VBoxContainer"]
 layout_mode = 2
@@ -517,10 +562,12 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
+metadata/_edit_lock_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="RightPanel/VBoxContainer/MarginContainer2"]
 layout_mode = 2
 theme_override_constants/separation = 15
+metadata/_edit_lock_ = true
 
 [node name="Total" type="Label" parent="RightPanel/VBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
@@ -565,6 +612,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(768, 416)
 theme_override_styles/panel = SubResource("StyleBoxFlat_ya4ey")
+metadata/_edit_lock_ = true
 
 [node name="CenteredPivot" type="Node" parent="ModalOverlay/Modal"]
 script = ExtResource("12_a8y0u")
@@ -581,10 +629,12 @@ theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 40
+metadata/_edit_lock_ = true
 
 [node name="ModalContent" type="VBoxContainer" parent="ModalOverlay/Modal/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 40
+metadata/_edit_lock_ = true
 
 [node name="Name" type="Label" parent="ModalOverlay/Modal/MarginContainer/ModalContent"]
 layout_mode = 2
@@ -664,3 +714,57 @@ grow_horizontal = 0
 theme_override_font_sizes/font_size = 40
 text = "✕"
 flat = true
+metadata/_edit_lock_ = true
+
+[node name="Finish" type="Panel" parent="." node_paths=PackedStringArray("label_bravo", "particles_confetits")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_jkv2x")
+label_bravo = NodePath("Bravo")
+particles_confetits = [NodePath("GPUParticles2D"), NodePath("GPUParticles2D2")]
+metadata/_edit_lock_ = true
+
+[node name="Bravo" type="Label" parent="Finish"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -13.0
+offset_right = 42.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(436.5, 122.5)
+text = "BRAVO !"
+label_settings = SubResource("LabelSettings_a8y0u")
+metadata/_edit_lock_ = true
+
+[node name="CenteredPivot" type="Node" parent="Finish/Bravo"]
+script = ExtResource("12_a8y0u")
+metadata/_custom_type_script = "uid://ufh6mhdmrcj4"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Finish"]
+position = Vector2(960, 960)
+emitting = false
+amount = 100
+lifetime = 5.0
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_jkv2x")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="Finish"]
+position = Vector2(960, 960)
+emitting = false
+amount = 10
+lifetime = 5.0
+explosiveness = 1.0
+trail_enabled = true
+trail_lifetime = 0.19
+trail_sections = 4
+process_material = SubResource("ParticleProcessMaterial_jbj1t")

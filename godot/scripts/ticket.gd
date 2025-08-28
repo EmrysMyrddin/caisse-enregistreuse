@@ -5,6 +5,8 @@ const ticket_item_component = preload("res://scenes/components/ticket_item.tscn"
 
 @export var label_total: Label
 @export var modal: Modal
+@export var button_validate: Button
+@export var panel_finish: FinishPanel
 
 var basket: Dictionary[ProductItem, int] = {}
 var basket_components: Dictionary[ProductItem, TicketItemComponent] = {}
@@ -12,7 +14,7 @@ var basket_components: Dictionary[ProductItem, TicketItemComponent] = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass  # Replace with function body.
+	button_validate.gui_input.connect(Utils.on_click(_validate))
 
 
 func save_product(product: ProductItem, quantity: int):
@@ -55,3 +57,12 @@ func _update_total() -> void:
 
 func _basket_entry_string(product: ProductItem) -> String:
 	return "x" + str(basket[product]) + " " + product.name
+
+
+func _validate():
+	for product in basket_components:
+		basket_components[product].queue_free()
+	self.basket_components = {}
+	self.basket = {}
+	_update_total()
+	panel_finish.open()
