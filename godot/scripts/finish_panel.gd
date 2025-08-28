@@ -12,9 +12,8 @@ func _ready() -> void:
 	gui_input.connect(Utils.on_click(close))
 	visible = false
 	self_modulate.a = 0
-	var pos = get_global_transform_with_canvas() * label_bravo.global_position
 	for particles in particles_confetits:
-		particles.global_position = pos
+		particles.hide()
 
 
 func open() -> void:
@@ -31,11 +30,7 @@ func open() -> void:
 		func():
 			for particles in particles_confetits:
 				particles.restart()
-	)
-	tween.tween_callback(
-		func():
-			for particles in particles_confetits:
-				particles.emitting = false
+				particles.show()
 	)
 
 
@@ -43,10 +38,9 @@ func close() -> void:
 	if tween and tween.is_valid():
 		tween.kill()
 		tween = null
+	for particles in particles_confetits:
+		particles.hide()
 	tween = create_tween().set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(self, "self_modulate:a", 0, 0.3)
-	tween.tween_callback(
-		func():
-			hide()
-			label_bravo.scale = Vector2.ZERO
-	)
+	tween.parallel().tween_property(label_bravo, "scale", Vector2.ZERO, 0.3)
+	tween.tween_callback(func(): hide())

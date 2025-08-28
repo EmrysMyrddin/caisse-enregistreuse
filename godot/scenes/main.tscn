@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://b6cwms37nw5dh"]
+[gd_scene load_steps=57 format=3 uid="uid://b6cwms37nw5dh"]
 
 [ext_resource type="Script" uid="uid://bvfqwngrft43" path="res://scripts/grid.gd" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://cllrkebsc3egn" path="res://scripts/components/unfocus_search.gd" id="2_85g3d"]
@@ -15,6 +15,7 @@
 [ext_resource type="SystemFont" uid="uid://78nrcbitq0yv" path="res://fonts/montserrat_bold.tres" id="13_a8y0u"]
 [ext_resource type="SystemFont" uid="uid://fmxa8cxq16ji" path="res://fonts/montserrat_regular.tres" id="14_jkv2x"]
 [ext_resource type="Script" uid="uid://c0i7bju2scxrr" path="res://scripts/finish_panel.gd" id="15_jkv2x"]
+[ext_resource type="Texture2D" uid="uid://hitu8lv6g54x" path="res://assets/confettis.png" id="16_jbj1t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6xl0"]
 content_margin_left = 0.0
@@ -311,43 +312,55 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="LabelSettings" id="LabelSettings_a8y0u"]
-font = ExtResource("13_a8y0u")
-font_size = 200
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_muem4"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Gradient" id="Gradient_jbj1t"]
+offsets = PackedFloat32Array(0, 0.14285715, 0.2857143, 0.42857143, 0.5714286, 0.71428573, 0.85714287, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.8333334, 0, 1, 0.33333325, 1, 0, 1, 0, 1, 0.5, 1, 0, 0.6666665, 1, 1, 0.16666651, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0.016666412, 1)
+metadata/_snap_count = 7
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_muem4"]
+gradient = SubResource("Gradient_jbj1t")
+
+[sub_resource type="Curve" id="Curve_dp3eg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.20098038, 0.9103943), -0.83142513, -0.83142513, 0, 0, Vector2(1, 1), -0.99231964, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_0ld40"]
+curve = SubResource("Curve_dp3eg")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jkv2x"]
 particle_flag_disable_z = true
-particle_flag_damping_as_friction = true
 angle_min = 1.0728836e-05
 angle_max = 360.00003
 direction = Vector3(0, -1, 0)
-initial_velocity_min = 703.05
-initial_velocity_max = 903.13
-gravity = Vector3(0, 490, 0)
-linear_accel_min = 55.039997
-linear_accel_max = 79.63
-scale_min = 3.4399998
-scale_max = 17.32
-color = Color(0.76872903, 0.768729, 0.768729, 1)
-hue_variation_min = -0.68
-hue_variation_max = 0.72999996
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -180.00002
+angular_velocity_max = 179.99998
+gravity = Vector3(0, 150, 0)
+linear_accel_min = 9.999997
+linear_accel_max = 29.999996
+damping_min = 140.0
+damping_max = 140.0
+damping_curve = SubResource("CurveTexture_0ld40")
+scale_min = 0.5
+scale_max = 2.0
+color_initial_ramp = SubResource("GradientTexture1D_muem4")
+hue_variation_min = -0.020000022
+hue_variation_max = 0.019999977
+anim_speed_min = 6.0
+anim_speed_max = 9.0
+anim_offset_max = 1.0
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jbj1t"]
-particle_flag_disable_z = true
-particle_flag_damping_as_friction = true
-angle_min = 1.0728836e-05
-angle_max = 360.00003
-direction = Vector3(0, -1, 0)
-initial_velocity_min = 703.05
-initial_velocity_max = 903.13
-gravity = Vector3(0, 490, 0)
-linear_accel_min = 55.039997
-linear_accel_max = 79.63
-scale_min = 3.4399998
-scale_max = 7.0499997
-color = Color(0.76872903, 0.768729, 0.768729, 1)
-hue_variation_min = -0.68
-hue_variation_max = 0.72999996
+[sub_resource type="LabelSettings" id="LabelSettings_a8y0u"]
+font = ExtResource("13_a8y0u")
+font_size = 200
 
 [node name="Panel" type="Panel"]
 anchors_preset = 15
@@ -725,8 +738,29 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("15_jkv2x")
 label_bravo = NodePath("Bravo")
-particles_confetits = [NodePath("GPUParticles2D"), NodePath("GPUParticles2D2")]
+particles_confetits = [NodePath("Control/GPUParticles2D")]
 metadata/_edit_lock_ = true
+
+[node name="Control" type="Control" parent="Finish"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.59300005
+anchor_right = 0.5
+anchor_bottom = 0.59300005
+offset_top = -0.44006348
+offset_bottom = -0.44006348
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Finish/Control"]
+material = SubResource("CanvasItemMaterial_muem4")
+emitting = false
+amount = 100
+texture = ExtResource("16_jbj1t")
+lifetime = 10.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_jkv2x")
 
 [node name="Bravo" type="Label" parent="Finish"]
 layout_mode = 1
@@ -749,22 +783,3 @@ metadata/_edit_lock_ = true
 [node name="CenteredPivot" type="Node" parent="Finish/Bravo"]
 script = ExtResource("12_a8y0u")
 metadata/_custom_type_script = "uid://ufh6mhdmrcj4"
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Finish"]
-position = Vector2(960, 960)
-emitting = false
-amount = 100
-lifetime = 5.0
-explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_jkv2x")
-
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="Finish"]
-position = Vector2(960, 960)
-emitting = false
-amount = 10
-lifetime = 5.0
-explosiveness = 1.0
-trail_enabled = true
-trail_lifetime = 0.19
-trail_sections = 4
-process_material = SubResource("ParticleProcessMaterial_jbj1t")
