@@ -3,7 +3,7 @@ extends Panel
 
 var tween: Tween
 
-@export var label_bravo: Label
+@export var label_bravo: RichTextLabel
 @export var particles_confetits: Array[GPUParticles2D]
 
 
@@ -40,6 +40,7 @@ func close() -> void:
 		tween = null
 	for particles in particles_confetits:
 		particles.hide()
+		particles.emitting = false
 	tween = create_tween().set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(self, "self_modulate:a", 0, 0.3)
 	tween.parallel().tween_property(label_bravo, "scale", Vector2.ZERO, 0.3)

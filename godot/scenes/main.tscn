@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://b6cwms37nw5dh"]
+[gd_scene load_steps=58 format=3 uid="uid://b6cwms37nw5dh"]
 
 [ext_resource type="Script" uid="uid://bvfqwngrft43" path="res://scripts/grid.gd" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://cllrkebsc3egn" path="res://scripts/components/unfocus_search.gd" id="2_85g3d"]
@@ -16,6 +16,7 @@
 [ext_resource type="SystemFont" uid="uid://fmxa8cxq16ji" path="res://fonts/montserrat_regular.tres" id="14_jkv2x"]
 [ext_resource type="Script" uid="uid://c0i7bju2scxrr" path="res://scripts/finish_panel.gd" id="15_jkv2x"]
 [ext_resource type="Texture2D" uid="uid://hitu8lv6g54x" path="res://assets/confettis.png" id="16_jbj1t"]
+[ext_resource type="Script" uid="uid://dc574ej4r35ko" path="res://scripts/resources/rainbow_text_effect.gd" id="17_muem4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6xl0"]
 content_margin_left = 0.0
@@ -336,11 +337,13 @@ curve = SubResource("Curve_dp3eg")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jkv2x"]
 particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1920, 1, 1)
 angle_min = 1.0728836e-05
 angle_max = 360.00003
-direction = Vector3(0, -1, 0)
-initial_velocity_min = 400.0
-initial_velocity_max = 600.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 70.96
+initial_velocity_max = 270.96
 angular_velocity_min = -180.00002
 angular_velocity_max = 179.99998
 gravity = Vector3(0, 150, 0)
@@ -358,9 +361,11 @@ anim_speed_min = 6.0
 anim_speed_max = 9.0
 anim_offset_max = 1.0
 
-[sub_resource type="LabelSettings" id="LabelSettings_a8y0u"]
-font = ExtResource("13_a8y0u")
-font_size = 200
+[sub_resource type="RichTextEffect" id="RichTextEffect_dp3eg"]
+script = ExtResource("17_muem4")
+color_ramp = SubResource("Gradient_jbj1t")
+period = 5.0
+metadata/_custom_type_script = "uid://dc574ej4r35ko"
 
 [node name="Panel" type="Panel"]
 anchors_preset = 15
@@ -640,7 +645,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 20
+theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 metadata/_edit_lock_ = true
 
@@ -743,42 +748,41 @@ metadata/_edit_lock_ = true
 
 [node name="Control" type="Control" parent="Finish"]
 layout_mode = 1
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.59300005
 anchor_right = 0.5
-anchor_bottom = 0.59300005
-offset_top = -0.44006348
-offset_bottom = -0.44006348
 grow_horizontal = 2
-grow_vertical = 2
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Finish/Control"]
 material = SubResource("CanvasItemMaterial_muem4")
-emitting = false
-amount = 100
+amount = 300
 texture = ExtResource("16_jbj1t")
-lifetime = 10.0
-one_shot = true
-explosiveness = 1.0
+lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_jkv2x")
 
-[node name="Bravo" type="Label" parent="Finish"]
+[node name="Bravo" type="RichTextLabel" parent="Finish"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -42.0
-offset_top = -13.0
-offset_right = 42.0
-offset_bottom = 13.0
+offset_left = -440.0
+offset_top = -124.0
+offset_right = 433.0
+offset_bottom = 121.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(436.5, 122.5)
-text = "BRAVO !"
-label_settings = SubResource("LabelSettings_a8y0u")
-metadata/_edit_lock_ = true
+theme_override_font_sizes/normal_font_size = 200
+theme_override_font_sizes/bold_font_size = 200
+bbcode_enabled = true
+text = "[example][rainbow speed=1][b]BRAVO ![/b][/rainbow][/example]"
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+vertical_alignment = 1
+custom_effects = [SubResource("RichTextEffect_dp3eg")]
 
 [node name="CenteredPivot" type="Node" parent="Finish/Bravo"]
 script = ExtResource("12_a8y0u")
