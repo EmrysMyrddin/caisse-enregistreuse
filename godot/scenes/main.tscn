@@ -599,6 +599,7 @@ text = "TERMINER
 "
 
 [node name="ModalOverlay" type="Panel" parent="." node_paths=PackedStringArray("ticket", "modal", "label_name", "label_quantity", "button_less", "button_more", "button_validate", "button_close", "hbox_images")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -747,6 +748,7 @@ particles_confetits = [NodePath("Control/GPUParticles2D")]
 metadata/_edit_lock_ = true
 
 [node name="Control" type="Control" parent="Finish"]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -777,7 +779,7 @@ pivot_offset = Vector2(436.5, 122.5)
 theme_override_font_sizes/normal_font_size = 200
 theme_override_font_sizes/bold_font_size = 200
 bbcode_enabled = true
-text = "[example][rainbow speed=1][b]BRAVO ![/b][/rainbow][/example]"
+text = "[bravo][rainbow speed=1][b]BRAVO ![/b][/rainbow][/bravo]"
 scroll_active = false
 shortcut_keys_enabled = false
 horizontal_alignment = 1
@@ -787,3 +789,19 @@ custom_effects = [SubResource("RichTextEffect_dp3eg")]
 [node name="CenteredPivot" type="Node" parent="Finish/Bravo"]
 script = ExtResource("12_a8y0u")
 metadata/_custom_type_script = "uid://ufh6mhdmrcj4"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Finish"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.06666667
+anchor_top = 0.65185183
+anchor_right = 0.93333334
+anchor_bottom = 0.94814813
+theme_override_constants/h_separation = -50
+last_wrap_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Finish"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
